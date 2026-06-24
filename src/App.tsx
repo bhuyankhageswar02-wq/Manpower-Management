@@ -219,7 +219,7 @@ export default function App() {
           <div className="hero-photo-wrap">
             <img src="/assets/images1.png" alt="New Start" className="hero-photo" />
             <div className="hero-card">
-              <p className="hero-card-name">Khageswar Bhuyan</p>
+              <p className="hero-card-name">New Skill</p>
               <p className="hero-card-role">Manufacturing &amp; Operations Leader</p>
               <p className="hero-card-bio">
                 15+ years across electronics, automotive, and engineering. Led plant operations
