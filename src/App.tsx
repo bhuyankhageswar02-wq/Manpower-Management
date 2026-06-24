@@ -44,7 +44,7 @@ const SERVICES = [
   },
   {
     emoji: '🔌',
-    title: 'EMS & Electronics Excellence',
+    title: 'ManpowerSkill',
     bullets: [
       'SMT line optimisation & NPI → mass production',
       'High-mix PCB manufacturing systems',
