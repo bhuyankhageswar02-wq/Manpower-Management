@@ -15,31 +15,31 @@ const SERVICES = [
     emoji: '🏭',
     title: 'Green Field and Brown Field Projects',
     bullets: [
-      'Capacity planning, layout design, and material flow optimisation',
-      'Establishing world-class manufacturing systems based on Lean & TPM',
-      'Multi-plant manufacturing integration projects',
-      'Building scalable processes for quality, productivity, and safety',
-      'Implementing digital dashboards, traceability, and smart factory elements',
+      'Strategic Manpower Planning: Headcount forecasting, role profiling, and organizational design for new setups',
+      'Rapid Mobilization Programs: Sourcing and deploying large-scale technical talent to meet aggressive commission timelines',
+      'Core Team & Leadership Sourcing: Sourcing plant managers, shift supervisors, and specialized lead engineers',
+      'Onboarding & Safety Standardization: Designing tailored induction frameworks focused on plant floor compliance, safety, and productivity',
+      
     ],
   },
   {
     emoji: '🏭',
-    title: 'Plant Performance & Turnaround',
+    title: 'Workforce Performance & Skill Transformation',
     bullets: [
-      'OEE improvement & line balancing',
-      'FPY & PPM reduction programs',
-      'Bottleneck analysis & debottlenecking',
-      'Structured daily management & reviews',
+      'Skill Mapping & Gap Analysis: Auditing current operator and technician skill matrices against target OEE metrics',
+      'Lean & TPM Capability Building: Designing hands-on training for structured daily management, 5S, and continuous improvement',
+      'Targeted Quality & FPY Upskilling: Specialized technical training programs to reduce human error, PPM defects, and scrap rates',
+      'Frontline Leadership Development: Transforming shop-floor supervisors into highly effective team leaders and problem-free operators',
     ],
   },
   {
     emoji: '📊',
-    title: 'P&L & Operations Strategy',
+    title: 'Strategic Talent & HR Governance',
     bullets: [
-      'Capacity planning & footprint decisions',
-      'Cost-to-serve & profitability improvement',
-      'KPI design & governance rhythm',
-      'Make vs buy & outsourcing strategy',
+      'Labor Productivity & Manpower Optimization: Balancing line headcounts and shift structures to improve cost-to-serve metrics',
+      'Retention & Talent Pipeline Design: Combatting high shop-floor turnover through structured career paths and incentive mapping',
+      'HR Governance & Performance Rhythms: Implementing skill-based KPI dashboards, appraisal structures, and shift governance',
+      'Contractual vs. Permanent Workforce Strategy: Designing "make vs. buy" strategies for flexible, compliant, and cost-effective staffing',
     ],
   },
   {
@@ -77,36 +77,38 @@ const SERVICES = [
 /* ── certifications ── */
 const CERTS = [
   'Certified Lean Manufacturing Professional',
-  'Certified Total Productive Maintenance Professional',
+  'Certified Auditor Professional',
   'Certified Lean Six Sigma Black Belt Professional',
-  'Certified Supply Chain Management Professional (IIT-Madras)',
+  'Certified AI in Manufacturing Professional (IIT-Madras)',
 ];
 
 /* ── focus area tags ── */
 const FOCUS = [
-  'Plant turnaround',
-  'Manufacturing Operations Leadership',
-  'OEE & throughput',
-  'Business & Financial Leadership',
-  'Performance & Productivity Improvement',
-  'P&L & governance',
-  'Leadership development',
-  'Transformation Management',
-  'Leadership & Organisation Development',
-  'AI Integrated Manufacturing Systems',
-  'Digital & Manufacturing Execution Systems',
+  const servicesAndExpertise = [
+  'Plant Turnaround Sourcing & Consulting',
+  'Manufacturing Operations Leadership Recruitment',
+  'OEE & Throughput Optimization Training',
+  'Business & Financial Leadership Placement',
+  'Performance & Productivity Improvement Programs',
+  'P&L & Workforce Governance Strategy',
+  'Frontline & Executive Leadership Development',
+  'Transformation & Change Management Talent',
+  'Leadership & Organisation Development (OD)',
+  'AI Integrated Manufacturing Systems Staffing',
+  'Digital & Manufacturing Execution Systems (MES) Training'
+];,
 ];
 
 /* ── impact metrics ── */
 const METRICS = [
-  { label: 'Yield improvement', value: 99, suffix: '%', sub: 'from 95.7% in high-volume EMS' },
-  { label: 'Rejection reduction matrices', value: 0, suffix: ' PPM', sub: 'down from 46,000 PPM' },
-  { label: 'Cost Saving', value: 750, suffix: 'K US$', sub: 'in 3 years' },
-  { label: 'Productivity gain', value: 32, suffix: '%+', sub: 'through line balancing & SMED' },
-  { label: 'Output increase', value: 40, suffix: '%', sub: 'for critical production line' },
-  { label: 'BOM Cost Reduction', value: 18, suffix: '%', sub: '' },
-  { label: 'Wastage Reduction', value: 25, suffix: '%', sub: '' },
-  { label: 'Spare & Consumables Cost Reduction', value: 30, suffix: '%', sub: '' },
+  { label: 'Workforce Stability', value: 68, suffix: '%', sub: 'drop in shop-floor attrition through structured skill-mapping' },
+  { label: 'Rapid Mobilization', value: 14, suffix: ' Days', sub: 'average turnaround time for deploying pre-vetted technical teams' },
+  { label: 'Speed to Autonomy', value: 45, suffix: '%', sub: 'reduction in operator training lead time using multi-skilling matrices' },
+  { label: 'Labor Productivity Gain', value: 28, suffix: '%+', sub: 'increase in line productivity following Frontline Leadership Development' },
+  { label: 'Precision Placement', value: 94, suffix: '%', sub: 'first-time right placement match rate for senior manufacturing leaders' },
+  { label: 'Manpower Savings', value: 15, suffix: '%', sub: 'reduction in labor costs through contract vs permanent modeling' },
+  { label: 'Skill-Based Error Reduction', value: 42, suffix: '%', sub: 'drop in plant-floor defects following zero-PPM mindset training' },
+  { label: 'Governance & Safety', value: 0, suffix: '', sub: 'statutory compliance and critical safety incidents across workforces' }
 ];
 
 /* ── animated counter hook ── */
@@ -194,21 +196,20 @@ export default function App() {
         <div className="hero-inner">
           {/* left */}
           <div className="hero-text">
-            <span className="hero-badge">Manufacturing &amp; Operations Consultant</span>
-            <p className="hero-tagline">Helping plants scale profitably and reliably</p>
+            <span className="hero-badge">Manpower Consultancy &amp; Service</span>
+            <p className="hero-tagline">Architects of the Modern Workforce: Seamlessly Matching Skill to Demand</p>
             <blockquote className="hero-quote">
-              "Topline may fluctuate — the bottom line must stay strong"
+              "The Right Skills. The Right Scale. The Right Time."
             </blockquote>
             <p className="hero-desc">
-              Partnering with CXOs and Plant Heads to turn complex operations into predictable,
-              high-performance, and profitable systems.
+              Partnered with leadership to define exact staffing requirements and strategically analyzed skill gaps, ensuring the workforce was equipped to meet upcoming business objectives.
             </p>
             <div className="hero-stats">
-              <span>15+ years</span><span className="divider">|</span>
+              <span>5+ years</span><span className="divider">|</span>
               <span>India &amp; Middle East</span><span className="divider">|</span>
-              <span>P&amp;L Ownership</span><span className="divider">|</span>
-              <span>Electronics &amp; EMS</span><span className="divider">|</span>
-              <span>Automotive</span>
+              <span>Solar &amp;Renewable Energy</span><span className="divider">|</span>
+              <span>EPC </span><span className="divider">|</span>
+              <span>Power Sectors</span>
             </div>
             <div className="hero-btns">
               <a href="#contact" className="btn-primary">Schedule a conversation</a>
@@ -222,8 +223,7 @@ export default function App() {
               <p className="hero-card-name">New Skill</p>
               <p className="hero-card-role">Manufacturing &amp; Operations Leader</p>
               <p className="hero-card-bio">
-                15+ years across electronics, automotive, and engineering. Led plant operations
-                with full P&amp;L responsibility across India and the Middle East.
+                5+ years across Renewal, automotive, and engineering. Provide Skill Manpower responsibility across India.
               </p>
             </div>
           </div>
@@ -238,18 +238,15 @@ export default function App() {
         <div className="section-inner">
           <div className="section-header">
             <span className="section-tag">About</span>
-            <h2 className="section-title">About Khageswar Bhuyan</h2>
+            <h2 className="section-title">About Varenya Consulting</h2>
           </div>
           <div className="about-grid">
             <div className="about-text">
               <p>
-                I work with promoters, CXOs, and Plant Heads to transform under-performing plants
-                into stable, scalable, and profitable operations. My experience spans EMS,
-                electronics, automotive, and engineered products across India and the Middle East.
+                I Our consultancy serves as a strategic HR partner by identifying, screening, and recruiting high-caliber professionals tailored to your specific industry needs. We bridge workforce gaps through targeted skill development and training to ensure candidates are job-ready from day one, while offering flexible permanent, temporary, or project-based staffing solutions to match your business fluctuations. By seamlessly handling compliance, onboarding, and ongoing workforce management, we enable you to focus entirely on driving core business growth.
               </p>
               <p>
-                I combine shop-floor depth with boardroom clarity — linking OEE, PPM, and
-                throughput to P&amp;L, cash flow, and strategic goals.
+                Partnered with leadership to define exact staffing requirements and strategically analyzed skill gaps, ensuring the workforce was equipped to meet upcoming business objectives.
               </p>
               <p className="focus-heading"><strong>Focus areas:</strong></p>
               <div className="focus-tags">
@@ -267,8 +264,8 @@ export default function App() {
             <span className="section-tag">Consulting Services</span>
             <h2 className="section-title">How I Can Help</h2>
             <p className="section-sub">
-              Engagements are designed to be practical, data-driven, and execution-focused —
-              aligned with your plant realities and business goals.
+              Empowering workforces. Elevating businesses.
+Success requires more than just filling positions—it requires the right skills. We offer end-to-end workforce solutions, combining strategic talent acquisition with targeted skill development to prepare your team for tomorrow's challenges.
             </p>
           </div>
           <div className="services-grid">
@@ -336,12 +333,11 @@ export default function App() {
             <span className="section-tag">Let's Talk</span>
             <h2 className="section-title">Get in Touch</h2>
             <p className="section-sub">
-              If you are looking at stabilising a plant, scaling capacity, or improving
-              profitability, we can start with a focused conversation.
+              If you are looking at building a high-performing team, accelerating your hiring timeline, or future-proofing your workforce's skills, we can start with a focused conversation.
             </p>
           </div>
           <div className="contact-links">
-            <a href="tel:+917743972217" className="contact-link">
+            <a href="tel:+9177990077188" className="contact-link">
               <span>📞</span> Call: +91 77439 72217
             </a>
             <a
@@ -358,7 +354,7 @@ export default function App() {
 
       {/* ═══ FOOTER ═══ */}
       <footer className="site-footer">
-        <p>© {new Date().getFullYear()} Khageswar Bhuyan · Manufacturing &amp; Operations Consultant</p>
+        <p>© {new Date().getFullYear()} Varenya Consulting · Manpower &amp; Skill Consultant</p>
       </footer>
 
     </div>
