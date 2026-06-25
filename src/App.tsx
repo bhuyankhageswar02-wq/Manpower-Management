@@ -19,7 +19,6 @@ const SERVICES = [
       'Rapid Mobilization Programs: Sourcing and deploying large-scale technical talent to meet aggressive commission timelines',
       'Core Team & Leadership Sourcing: Sourcing plant managers, shift supervisors, and specialized lead engineers',
       'Onboarding & Safety Standardization: Designing tailored induction frameworks focused on plant floor compliance, safety, and productivity',
-      
     ],
   },
   {
@@ -82,9 +81,8 @@ const CERTS = [
   'Certified AI in Manufacturing Professional (IIT-Madras)',
 ];
 
-/* ── focus area tags ── */
+/* ── focus area tags (FIXED SYNTAX) ── */
 const FOCUS = [
-  const servicesAndExpertise = [
   'Plant Turnaround Sourcing & Consulting',
   'Manufacturing Operations Leadership Recruitment',
   'OEE & Throughput Optimization Training',
@@ -96,7 +94,6 @@ const FOCUS = [
   'Leadership & Organisation Development (OD)',
   'AI Integrated Manufacturing Systems Staffing',
   'Digital & Manufacturing Execution Systems (MES) Training'
-];,
 ];
 
 /* ── impact metrics ── */
@@ -151,7 +148,7 @@ function MetricCard({ m }: { m: (typeof METRICS)[0] }) {
 }
 
 /* ══════════════════════════════════════════
-   APP
+    APP
 ══════════════════════════════════════════ */
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -207,7 +204,7 @@ export default function App() {
             <div className="hero-stats">
               <span>5+ years</span><span className="divider">|</span>
               <span>India &amp; Middle East</span><span className="divider">|</span>
-              <span>Solar &amp;Renewable Energy</span><span className="divider">|</span>
+              <span>Solar &amp; Renewable Energy</span><span className="divider">|</span>
               <span>EPC </span><span className="divider">|</span>
               <span>Power Sectors</span>
             </div>
@@ -223,7 +220,7 @@ export default function App() {
               <p className="hero-card-name">New Skill</p>
               <p className="hero-card-role">Manufacturing &amp; Operations Leader</p>
               <p className="hero-card-bio">
-                5+ years across Renewal, automotive, and engineering. Provide Skill Manpower responsibility across India.
+                5+ years across Renewable, automotive, and engineering. Provide Skill Manpower responsibility across India.
               </p>
             </div>
           </div>
@@ -243,7 +240,7 @@ export default function App() {
           <div className="about-grid">
             <div className="about-text">
               <p>
-                I Our consultancy serves as a strategic HR partner by identifying, screening, and recruiting high-caliber professionals tailored to your specific industry needs. We bridge workforce gaps through targeted skill development and training to ensure candidates are job-ready from day one, while offering flexible permanent, temporary, or project-based staffing solutions to match your business fluctuations. By seamlessly handling compliance, onboarding, and ongoing workforce management, we enable you to focus entirely on driving core business growth.
+                Our consultancy serves as a strategic HR partner by identifying, screening, and recruiting high-caliber professionals tailored to your specific industry needs. We bridge workforce gaps through targeted skill development and training to ensure candidates are job-ready from day one, while offering flexible permanent, temporary, or project-based staffing solutions to match your business fluctuations. By seamlessly handling compliance, onboarding, and ongoing workforce management, we enable you to focus entirely on driving core business growth.
               </p>
               <p>
                 Partnered with leadership to define exact staffing requirements and strategically analyzed skill gaps, ensuring the workforce was equipped to meet upcoming business objectives.
@@ -264,8 +261,7 @@ export default function App() {
             <span className="section-tag">Consulting Services</span>
             <h2 className="section-title">How I Can Help</h2>
             <p className="section-sub">
-              Empowering workforces. Elevating businesses.
-Success requires more than just filling positions—it requires the right skills. We offer end-to-end workforce solutions, combining strategic talent acquisition with targeted skill development to prepare your team for tomorrow's challenges.
+              Empowering workforces. Elevating businesses. Success requires more than just filling positions—it requires the right skills. We offer end-to-end workforce solutions, combining strategic talent acquisition with targeted skill development to prepare your team for tomorrow's challenges.
             </p>
           </div>
           <div className="services-grid">
@@ -326,7 +322,7 @@ Success requires more than just filling positions—it requires the right skills
         </div>
       </section>
 
-      {/* ═══ CONTACT ═══ */}
+      {/* ═══ CONTACT (FIXED PHONE LINK) ═══ */}
       <section id="contact" className="section-white">
         <div className="section-inner">
           <div className="section-header">
@@ -337,7 +333,7 @@ Success requires more than just filling positions—it requires the right skills
             </p>
           </div>
           <div className="contact-links">
-            <a href="tel:+9177990077188" className="contact-link">
+            <a href="tel:+917743972217" className="contact-link">
               <span>📞</span> Call: +91 77439 72217
             </a>
             <a
