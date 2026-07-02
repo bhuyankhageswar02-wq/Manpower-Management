@@ -1,358 +1,355 @@
-import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturing Health Check up</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #0284c7;
+            --green: #22c55e;
+            --yellow: #eab308;
+            --red: #ef4444;
+            --bg: #f8fafc;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        h1, h2, h3, h4 { color: var(--primary); }
+        .section-header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .grid-header {
+            font-weight: bold;
+            color: #64748b;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            background-color: white;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+        button {
+            width: 100%;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #0369a1; }
+        
+        #resultsSection {
+            display: none;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px dashed #cbd5e1;
+        }
+        .score-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .score-card {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        .bg-red { background-color: var(--red); }
+        .bg-yellow { background-color: var(--yellow); color: #451a03; }
+        .bg-green { background-color: var(--green); }
+        
+        .solution-box {
+            background-color: #f1f5f9;
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        .solution-box h4 { margin: 0 0 8px 0; color: #1e293b; font-size: 1.1rem; }
+        .meta-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #475569;
+            background: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+        
+        .consultant-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .consultant-avatar {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        .contact-box h3 { color: white; margin-top: 0; }
+        .contact-box p { color: #94a3b8; }
+        .contact-link {
+            color: #38bdf8;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .print-btn {
+            background-color: #475569;
+            margin-top: 10px;
+        }
+        .print-btn:hover { background-color: #334155; }
+    </style>
+</head>
+<body>
 
-/* ── nav links ── */
-const NAV = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Impact', href: '#impact' },
-  { label: 'Contact', href: '#contact' },
-];
+<div class="container">
+    <h1>🏭 Industrial Manufacturing Health Check UP</h1>
+    <p>Analyze how core operational performance metrics leak financial resources. Input current statistics to see specialized deployment fixes from VARENYA Consultant.</p>
+    
+    <form id="auditForm" onsubmit="calculateAnalysis(event)">
+        
+        <div class="grid" style="margin-bottom: 0;">
+            <div class="grid-header">Operational Parameters</div>
+            <div class="grid-header">Current Value</div>
+        </div>
 
-/* ── services ── */
-const SERVICES = [
-  {
-    emoji: '🏭',
-    title: 'Green Field and Brown Field Projects',
-    bullets: [
-      'Strategic Manpower Planning: Headcount forecasting, role profiling, and organizational design for new setups',
-      'Rapid Mobilization Programs: Sourcing and deploying large-scale technical talent to meet aggressive commission timelines',
-      'Core Team & Leadership Sourcing: Sourcing plant managers, shift supervisors, and specialized lead engineers',
-      'Onboarding & Safety Standardization: Designing tailored induction frameworks focused on plant floor compliance, safety, and productivity',
-    ],
-  },
-  {
-    emoji: '🏭',
-    title: 'Workforce Performance & Skill Transformation',
-    bullets: [
-      'Skill Mapping & Gap Analysis: Auditing current operator and technician skill matrices against target OEE metrics',
-      'Lean & TPM Capability Building: Designing hands-on training for structured daily management, 5S, and continuous improvement',
-      'Targeted Quality & FPY Upskilling: Specialized technical training programs to reduce human error, PPM defects, and scrap rates',
-      'Frontline Leadership Development: Transforming shop-floor supervisors into highly effective team leaders and problem-free operators',
-    ],
-  },
-  {
-    emoji: '📊',
-    title: 'Strategic Talent & HR Governance',
-    bullets: [
-      'Labor Productivity & Manpower Optimization: Balancing line headcounts and shift structures to improve cost-to-serve metrics',
-      'Retention & Talent Pipeline Design: Combatting high shop-floor turnover through structured career paths and incentive mapping',
-      'HR Governance & Performance Rhythms: Implementing skill-based KPI dashboards, appraisal structures, and shift governance',
-      'Contractual vs. Permanent Workforce Strategy: Designing "make vs. buy" strategies for flexible, compliant, and cost-effective staffing',
-    ],
-  },
-  {
-    emoji: '🔌',
-    title: 'ManpowerSkill',
-    bullets: [
-      'SMT line optimisation & NPI → mass production',
-      'High-mix PCB manufacturing systems',
-      'Repair, rework & test strategy',
-      'Supplier quality & incoming controls',
-    ],
-  },
-  {
-    emoji: '👥',
-    title: 'Leadership & Governance',
-    bullets: [
-      'Plant leadership coaching',
-      'Tiered review structures',
-      'Role clarity & accountability',
-      'Culture of problem-solving & kaizen',
-    ],
-  },
-  {
-    emoji: '🏆',
-    title: 'Business Excellence',
-    bullets: [
-      'Anchoring continuous improvement culture across plants and functions',
-      'Leading cost reduction, quality improvement, and productivity enhancement programs',
-      'Deploying Lean, Kaizen, and Six Sigma methodologies for measurable business impact',
-      'Ensuring process standardisation, audit readiness, and operational governance',
-    ],
-  },
-];
+        <div class="grid">
+            <label for="curr_oee">1. Overall Equipment Effectiveness (OEE) % <br><small style="font-weight:normal;color:#64748b;">Measures overall asset availability, performance, and line speed.</small></label>
+            <input type="number" id="curr_oee" step="0.1" min="0" max="100" required placeholder="e.g., 72">
+            <input type="hidden" id="tgt_oee" value="85">
+        </div>
 
-/* ── certifications ── */
-const CERTS = [
-  'Certified Lean Manufacturing Professional',
-  'Certified Auditor Professional',
-  'Certified Lean Six Sigma Black Belt Professional',
-  'Certified AI in Manufacturing Professional (IIT-Madras)',
-];
+        <div class="grid">
+            <label for="curr_fpy">2. First Pass Yield (FPY) % <br><small style="font-weight:normal;color:#64748b;">Percentage of units manufactured correctly the first time without rework.</small></label>
+            <input type="number" id="curr_fpy" step="0.1" min="0" max="100" required placeholder="e.g., 90">
+            <input type="hidden" id="tgt_fpy" value="98">
+        </div>
 
-/* ── focus area tags (FIXED SYNTAX) ── */
-const FOCUS = [
-  'Plant Turnaround Sourcing & Consulting',
-  'Manufacturing Operations Leadership Recruitment',
-  'OEE & Throughput Optimization Training',
-  'Business & Financial Leadership Placement',
-  'Performance & Productivity Improvement Programs',
-  'P&L & Workforce Governance Strategy',
-  'Frontline & Executive Leadership Development',
-  'Transformation & Change Management Talent',
-  'Leadership & Organisation Development (OD)',
-  'AI Integrated Manufacturing Systems Staffing',
-  'Digital & Manufacturing Execution Systems (MES) Training'
-];
+        <div class="grid">
+            <label for="curr_scrap">3. Material Scrap & Wastage Rate % <br><small style="font-weight:normal;color:#64748b;">Raw material thrown away or lost during production changes.</small></label>
+            <input type="number" id="curr_scrap" step="0.1" min="0" max="100" required placeholder="e.g., 3.5">
+            <input type="hidden" id="tgt_scrap" value="1.0">
+        </div>
 
-/* ── impact metrics ── */
-const METRICS = [
-  { label: 'Workforce Stability', value: 68, suffix: '%', sub: 'drop in shop-floor attrition through structured skill-mapping' },
-  { label: 'Rapid Mobilization', value: 14, suffix: ' Days', sub: 'average turnaround time for deploying pre-vetted technical teams' },
-  { label: 'Speed to Autonomy', value: 45, suffix: '%', sub: 'reduction in operator training lead time using multi-skilling matrices' },
-  { label: 'Labor Productivity Gain', value: 28, suffix: '%+', sub: 'increase in line productivity following Frontline Leadership Development' },
-  { label: 'Precision Placement', value: 94, suffix: '%', sub: 'first-time right placement match rate for senior manufacturing leaders' },
-  { label: 'Manpower Savings', value: 15, suffix: '%', sub: 'reduction in labor costs through contract vs permanent modeling' },
-  { label: 'Skill-Based Error Reduction', value: 42, suffix: '%', sub: 'drop in plant-floor defects following zero-PPM mindset training' },
-  { label: 'Governance & Safety', value: 0, suffix: '', sub: 'statutory compliance and critical safety incidents across workforces' }
-];
+        <div class="grid">
+            <label for="curr_downtime">4. Unplanned Downtime Hours / Month <br><small style="font-weight:normal;color:#64748b;">Unexpected equipment breakdowns cutting into standard shifts.</small></label>
+            <input type="number" id="curr_downtime" min="0" required placeholder="e.g., 45">
+            <input type="hidden" id="tgt_downtime" value="10">
+        </div>
 
-/* ── animated counter hook ── */
-function useCounter(target: number, duration = 1800, start: boolean = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    if (target === 0) { setCount(0); return; }
-    let startTime: number | null = null;
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, duration, start]);
-  return count;
-}
+        <div class="grid">
+            <label for="curr_energy">5. Energy / Resource Overhead Cost Variance % <br><small style="font-weight:normal;color:#64748b;">Current power/water/gas usage relative to standard target budget (100%).</small></label>
+            <input type="number" id="curr_energy" step="0.1" min="0" required placeholder="e.g., 118">
+            <input type="hidden" id="tgt_energy" value="100">
+        </div>
 
-/* ── metric card ── */
-function MetricCard({ m }: { m: (typeof METRICS)[0] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.4 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-  const count = useCounter(m.value, 1800, visible);
-  return (
-    <div ref={ref} className="metric-card">
-      <p className="metric-label">{m.label}</p>
-      <p className="metric-value">
-        {count}{m.suffix}
-      </p>
-      {m.sub && <p className="metric-sub">{m.sub}</p>}
+        <div class="grid">
+            <label for="industry_sector">6. Manufacturing Industry Sector <br><small style="font-weight:normal;color:#64748b;">Select your core facility field for context-specific analysis reports.</small></label>
+            <select id="industry_sector" required>
+                <option value="" disabled selected hidden>Choose your sector...</option>
+                <option value="solar">Solar & Renewable Energy</option>
+                <option value="epc">Engineering, Procurement & Construction (EPC)</option>
+                <option value="power">Power Sectors</option>
+                <option value="automotive">Automotive Infrastructure</option>
+                <option value="electronics">High-Mix PCB / SMT Electronics</option>
+            </select>
+        </div>
+
+        <button type="submit">📊 Process Diagnostic Evaluation</button>
+    </form>
+
+    <div id="resultsSection">
+        <h2>📋 Diagnostic Evaluation Results</h2>
+        
+        <div class="score-card-grid">
+            <div id="card_ops" class="score-card">Operational Stability Score: <span id="val_ops">0</span>%</div>
+            <div id="card_fin" class="score-card">Financial Containment Score: <span id="val_fin">0</span>%</div>
+        </div>
+
+        <h3>💡 Remediation Strategies & Project Timelines <span id="selectedSectorText" style="font-size: 1rem; color: #64748b; font-weight: normal; margin-left: 10px;"></span></h3>
+        <div id="solutionsContainer"></div>
+        
+        <div class="section-header">📋 Assigned Lead Expert Information</div>
+        <div class="consultant-card">
+            <div class="consultant-avatar">VC</div>
+            <div>
+                <h4 style="margin: 0 0 5px 0;">VARENYA Consultant</h4>
+                <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Principal Industrial & Clean-Tech Manufacturing Advisory Group</p>
+                <p style="margin: 5px 0 0 0; color: #475569; font-size: 0.85rem;">Specialization: Industrial Automation Architectures, Waste Reduction, & Operational Profitability Optimization</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h3>📞 Contact Us To Deploy Solutions</h3>
+            <p>Ready to reclaim lost manufacturing margins? Connect directly with our engineering advisory desk to plan an operational audit validation.</p>
+            <a href="mailto:VarenyaMail@gmail.com?subject=Manufacturing Optimization Deep-Dive Portfolio Consultation" class="contact-link">📧 Email Us: VarenyaMail@gmail.com</a>
+            <p style="margin-top:12px; font-size:1.1rem; color:#ffffff; font-weight: bold;">📱 Mobile Contact Hotline: +91 7990077188</p>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">📥 Print / Save Solution Report as PDF</button>
     </div>
-  );
-}
+</div>
 
-/* ══════════════════════════════════════════
-    APP
-══════════════════════════════════════════ */
-export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+<script>
+    function getStatusClass(score) {
+        if (score >= 95) return 'bg-green';
+        if (score >= 80) return 'bg-yellow';
+        return 'bg-red';
+    }
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', fn);
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
+    function calculateAnalysis(event) {
+        event.preventDefault();
 
-  return (
-    <div className="site-root">
+        const oeeCurr = parseFloat(document.getElementById('curr_oee').value);
+        const oeeTgt = parseFloat(document.getElementById('tgt_oee').value);
+        const fpyCurr = parseFloat(document.getElementById('curr_fpy').value);
+        const fpyTgt = parseFloat(document.getElementById('tgt_fpy').value);
+        const scrapCurr = parseFloat(document.getElementById('curr_scrap').value);
+        const scrapTgt = parseFloat(document.getElementById('tgt_scrap').value);
+        const downCurr = parseFloat(document.getElementById('curr_downtime').value);
+        const downTgt = parseFloat(document.getElementById('tgt_downtime').value);
+        const energyCurr = parseFloat(document.getElementById('curr_energy').value);
+        const energyTgt = parseFloat(document.getElementById('tgt_energy').value);
+        
+        // Grab the selected text from dropdown to append to heading reports
+        const sectorSelect = document.getElementById('industry_sector');
+        const selectedSectorName = sectorSelect.options[sectorSelect.selectedIndex].text;
 
-      {/* ═══ NAV ═══ */}
-      <header className={`site-nav ${scrolled ? 'nav-scrolled' : ''}`}>
-        <div className="nav-inner">
-          <a href="#" className="nav-logo">KB<span>.</span></a>
-          <nav className="nav-links">
-            {NAV.map(l => (
-              <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
-            ))}
-            <a href="#contact" className="nav-cta">Let's Talk</a>
-          </nav>
-          <button className="nav-hamburger" onClick={() => setMenuOpen(v => !v)}>
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="mobile-menu">
-            {NAV.map(l => (
-              <a key={l.href} href={l.href} className="mobile-link" onClick={() => setMenuOpen(false)}>{l.label}</a>
-            ))}
-            <a href="#contact" className="mobile-cta" onClick={() => setMenuOpen(false)}>Let's Talk</a>
-          </div>
-        )}
-      </header>
+        const opsScore = Math.round((((oeeCurr/oeeTgt) + (fpyCurr/fpyTgt)) / 2) * 100);
+        const finScore = Math.round((((scrapTgt/scrapCurr) + (downTgt/downCurr) + (energyTgt/energyCurr)) / 3) * 100);
 
-      {/* ═══ HERO ═══ */}
-      <section className="hero-section">
-        <div className="hero-bg-grid" />
-        <div className="hero-inner">
-          {/* left */}
-          <div className="hero-text">
-            <span className="hero-badge">Manpower Consultancy &amp; Service</span>
-            <p className="hero-tagline">Architects of the Modern Workforce: Seamlessly Matching Skill to Demand</p>
-            <blockquote className="hero-quote">
-              "The Right Skills. The Right Scale. The Right Time."
-            </blockquote>
-            <p className="hero-desc">
-              Partnered with leadership to define exact staffing requirements and strategically analyzed skill gaps, ensuring the workforce was equipped to meet upcoming business objectives.
-            </p>
-            <div className="hero-stats">
-              <span>5+ years</span><span className="divider">|</span>
-              <span>India &amp; Middle East</span><span className="divider">|</span>
-              <span>Solar &amp; Renewable Energy</span><span className="divider">|</span>
-              <span>EPC </span><span className="divider">|</span>
-              <span>Power Sectors</span>
-            </div>
-            <div className="hero-btns">
-              <a href="#contact" className="btn-primary">Schedule a conversation</a>
-              <a href="#impact" className="btn-outline">View impact delivered</a>
-            </div>
-          </div>
-          {/* right — photo + card */}
-          <div className="hero-photo-wrap">
-            <img src="/assets/images1.png" alt="New Start" className="hero-photo" />
-            <div className="hero-card">
-              <p className="hero-card-name">New Skill</p>
-              <p className="hero-card-role">Manufacturing &amp; Operations Leader</p>
-              <p className="hero-card-bio">
-                5+ years across Renewable, automotive, and engineering. Provide Skill Manpower responsibility across India.
-              </p>
-            </div>
-          </div>
-        </div>
-        <a href="#about" className="scroll-hint">
-          <ChevronDown size={28} />
-        </a>
-      </section>
+        document.getElementById('val_ops').innerText = opsScore;
+        document.getElementById('card_ops').className = `score-card ${getStatusClass(opsScore)}`;
+        
+        document.getElementById('val_fin').innerText = finScore;
+        document.getElementById('card_fin').className = `score-card ${getStatusClass(finScore)}`;
+        
+        // Output selected sector context directly to results header panel
+        document.getElementById('selectedSectorText').innerText = `[ Benchmark Domain: ${selectedSectorName} ]`;
 
-      {/* ═══ ABOUT ═══ */}
-      <section id="about" className="section-white">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-tag">About</span>
-            <h2 className="section-title">About Varenya Consulting</h2>
-          </div>
-          <div className="about-grid">
-            <div className="about-text">
-              <p>
-                Our consultancy serves as a strategic HR partner by identifying, screening, and recruiting high-caliber professionals tailored to your specific industry needs. We bridge workforce gaps through targeted skill development and training to ensure candidates are job-ready from day one, while offering flexible permanent, temporary, or project-based staffing solutions to match your business fluctuations. By seamlessly handling compliance, onboarding, and ongoing workforce management, we enable you to focus entirely on driving core business growth.
-              </p>
-              <p>
-                Partnered with leadership to define exact staffing requirements and strategically analyzed skill gaps, ensuring the workforce was equipped to meet upcoming business objectives.
-              </p>
-              <p className="focus-heading"><strong>Focus areas:</strong></p>
-              <div className="focus-tags">
-                {FOCUS.map(f => <span key={f} className="focus-tag">{f}</span>)}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        let solutionsHtml = "";
 
-      {/* ═══ SERVICES ═══ */}
-      <section id="services" className="section-gray">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-tag">Consulting Services</span>
-            <h2 className="section-title">How I Can Help</h2>
-            <p className="section-sub">
-              Empowering workforces. Elevating businesses. Success requires more than just filling positions—it requires the right skills. We offer end-to-end workforce solutions, combining strategic talent acquisition with targeted skill development to prepare your team for tomorrow's challenges.
-            </p>
-          </div>
-          <div className="services-grid">
-            {SERVICES.map(s => (
-              <div key={s.title} className="service-card">
-                <span className="service-emoji">{s.emoji}</span>
-                <h3 className="service-title">{s.title}</h3>
-                <ul className="service-bullets">
-                  {s.bullets.map(b => <li key={b}>{b}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
+        if ((oeeCurr / oeeTgt) < 0.95 || downCurr > downTgt) {
+            solutionsHtml += `
+                <div class="solution-box">
+                    <h4>⚙️ Operational Stability Solution: Deploy Smart Condition-Based Predictive Maintenance (PdM)</h4>
+                    <p>Elevated mechanical failures and depressed OEE directly deplete capacity volumes and rack up expensive expediting fees. Implementing edge IoT vibration telemetry tracking profiles across primary production bottlenecks shifts your facility away from costly reactive fixes toward planned maintenance loops.</p>
+                    <div class="meta-info">
+                        <span>⏳ Implementation Duration: 4 - 6 Weeks</span>
+                        <span>👤 Lead Advisor: VARENYA Consultant</span>
+                    </div>
+                </div>`;
+        }
 
-          {/* Certifications */}
-          <div className="certs-block">
-            <div className="service-card">
-              <span className="service-emoji">🎓</span>
-              <h3 className="service-title">Professional Certifications</h3>
-              <ul className="service-bullets">
-                {CERTS.map(c => <li key={c}>{c}</li>)}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        if (scrapCurr > scrapTgt || (fpyCurr / fpyTgt) < 0.95) {
+            solutionsHtml += `
+                <div class="solution-box">
+                    <h4>💎 Financial Solution: Establish Inline Quality Gate Controls & SPC Protocols</h4>
+                    <p>Failing to secure first-pass parameters burns direct material value and stacks hidden factory labor rework costs. By deploying localized Automated Optical Inspection (AOI) sensor nodes combined with rigid Statistical Process Control tracking, errors are corrected mid-stream before becoming massive scrap liabilities.</p>
+                    <div class="meta-info">
+                        <span>⏳ Implementation Duration: 3 - 5 Weeks</span>
+                        <span>👤 Lead Advisor: VARENYA Consultant</span>
+                    </div>
+                </div>`;
+        }
 
-      {/* ═══ PORTFOLIO ═══ */}
-      <section className="section-white">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-tag">Portfolio</span>
-            <h2 className="section-title">Work Portfolio</h2>
-          </div>
-          <div className="portfolio-wrap">
-            <img
-              src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1200"
-              alt="Manufacturing portfolio"
-              className="portfolio-img"
-            />
-          </div>
-        </div>
-      </section>
+        if (energyCurr > energyTgt) {
+            solutionsHtml += `
+                <div class="solution-box">
+                    <h4>⚡ Utility Resource Solution: Implement Peak Demand Load Balancing Protocols</h4>
+                    <p>Excess energy utility cost intensity indicators suggest active process heating/cooling or heavy mechanical runtime spikes occurring outside of primary economic cycles. Running structured resource scheduling software reduces basic fixed overhead allocations significantly.</p>
+                    <div class="meta-info">
+                        <span>⏳ Implementation Duration: 2 - 4 Weeks</span>
+                        <span>👤 Lead Advisor: VARENYA Consultant Support Desk</span>
+                    </div>
+                </div>`;
+        }
 
-      {/* ═══ IMPACT ═══ */}
-      <section id="impact" className="section-dark">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-tag-light">Impact Delivered</span>
-            <h2 className="section-title-light">A Snapshot of Outcomes</h2>
-            <p className="section-sub-light">
-              A snapshot of outcomes from recent engagements across manufacturing plants.
-            </p>
-          </div>
-          <div className="metrics-grid">
-            {METRICS.map(m => <MetricCard key={m.label} m={m} />)}
-          </div>
-        </div>
-      </section>
+        if(solutionsHtml === "") {
+            solutionsHtml = `
+                <div class="solution-box" style="border-left-color: var(--green)">
+                    <h4>🎉 Factory Operating in Top Tier Threshold</h4>
+                    <p>Calculated balances verify total execution is running flawlessly in alignment with baseline benchmarks. No critical structural corrections required.</p>
+                </div>`;
+        }
 
-      {/* ═══ CONTACT (FIXED PHONE LINK) ═══ */}
-      <section id="contact" className="section-white">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-tag">Let's Talk</span>
-            <h2 className="section-title">Get in Touch</h2>
-            <p className="section-sub">
-              If you are looking at building a high-performing team, accelerating your hiring timeline, or future-proofing your workforce's skills, we can start with a focused conversation.
-            </p>
-          </div>
-          <div className="contact-links">
-            <a href="tel:+917743972217" className="contact-link">
-              <span>📞</span> Call: +91 77439 72217
-            </a>
-            <a
-              href="https://www.linkedin.com/in/khageswar-bhuyan-910021297/?skipRedirect=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-link"
-            >
-              <span>🔗</span> LinkedIn Profile
-            </a>
-          </div>
-        </div>
-      </section>
+        document.getElementById('solutionsContainer').innerHTML = solutionsHtml;
+        document.getElementById('resultsSection').style.display = 'block';
+        document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 
-      {/* ═══ FOOTER ═══ */}
-      <footer className="site-footer">
-        <p>© {new Date().getFullYear()} Varenya Consulting · Manpower &amp; Skill Consultant</p>
-      </footer>
-
-    </div>
-  );
-}
+</body>
+</html>
